@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run Spectra
         id: spectra
-        uses: spark63/Spectra@v1.0.2
+        uses: spark63/Spectra@v1.0.4
 ```
 * Basically, it works when a push event occurs.
 * If you want to change the triggering event, you can change the `on` section of the yml.
