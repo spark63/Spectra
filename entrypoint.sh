@@ -98,7 +98,7 @@ index=$(( index+1 ))
 if [ -f "result.sarif" ]; then
 	SVAL=$(cat result.sarif | jq --arg rinfo $REPO '. + {repository: $rinfo}')
 	echo $SVAL | jq '.' > s.sarif
-	curl -X POST --data-binary "@s.sarif" -H "content-type: application/json" "spectra.dangun.io:8443/SetAudits" | jq
+	curl -X POST --data-binary "@s.sarif" -H "content-type: application/json" "https://spectra.dangun.io:8443/SetAudits" | jq
 fi
 
 exit 0
