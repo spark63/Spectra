@@ -1,0 +1,30 @@
+
+name: 'Spectra'
+description: 'Smart Contract Vulnerability Scanner'
+
+outputs:
+  scan-result:
+    description: 'scan result'
+    value: ${{ steps.scan-result.outputs.scan-result }}
+
+runs:
+  using: 'composite'
+  steps:
+
+    - id: scan
+      run: ${{ github.action_path }}/entrypoint.sh ${{ github.repository }}
+      shell: bash
+
+    - id: scan-result
+      run: echo "::set-output name=scan-result::result.sarif"
+      shell: bash
+  
+    - name: upload result
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: result.sarif
+        category: Spectra
+
+branding:
+  icon: 'shield'
+  color: 'blue'
